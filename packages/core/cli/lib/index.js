@@ -37,15 +37,12 @@ async function prepare() {
  */
 async function checkUpdate() {
   const notifier = updateNotifier({
-    pkg: {
-      name: "@sun-fe-cli/sun",
-      version: "0.0.1",
-    },
-    updateCheckInterval:0* 1000 * 60 * 60 * 24 * 7, // 1 week
+    pkg,
+    updateCheckInterval: 1000 * 60 * 60 * 24 * 7 * 0, // 1 week
   });
   notifier.notify();
   console.log(notifier);
-  
+
   // Update available! 6.32.0 → 6.32.1.                │
   // │   Changelog: https://github.com/pnpm/pnpm/releases/tag/v6.32.1   │
   // │                 Run pnpm add -g pnpm to update.                  │
