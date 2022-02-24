@@ -1,0 +1,15 @@
+{
+  "name": "@sun-fe/constant",
+  "version": "0.0.1",
+  "description": "@sun-fe中使用的常量定义",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [],
+  "author": "mojie",
+  "license": "ISC"
+}

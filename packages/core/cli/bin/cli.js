@@ -11,5 +11,5 @@ const log = require("@sun-fe/log");
 if (importLocal(__filename)) {
   log.info("优先使用本地的sun-fe-cli命令");
 } else {
-  require("../lib")(process.argv.slice(2));
+  require("../lib")();
 }

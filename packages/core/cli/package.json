@@ -15,8 +15,14 @@
   "author": "mojie",
   "license": "ISC",
   "dependencies": {
+    "@sun-fe/constant": "workspace:^0.0.1",
     "@sun-fe/log": "workspace:^0.0.1",
+    "boxen": "5.1.2",
+    "dotenv": "^16.0.0",
+    "fs-extra": "^10.0.1",
     "import-local": "^3.1.0",
-    "update-notifier": "^5.1.0"
+    "root-check": "^1.0.0",
+    "update-notifier": "^5.1.0",
+    "yargs": "^16.2.0"
   }
 }
