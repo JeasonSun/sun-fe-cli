@@ -1,7 +1,7 @@
 {
   "name": "@sun-fe/cli",
   "version": "0.0.1",
-  "description": "",
+  "description": "一站式前端研发工作脚手架",
   "main": "lib/index.js",
   "bin": {
     "sun": "bin/cli.js"
@@ -18,11 +18,12 @@
     "@sun-fe/constant": "workspace:^0.0.1",
     "@sun-fe/log": "workspace:^0.0.1",
     "boxen": "5.1.2",
+    "commander": "^9.0.0",
+    "dedent": "^0.7.0",
     "dotenv": "^16.0.0",
     "fs-extra": "^10.0.1",
     "import-local": "^3.1.0",
     "root-check": "^1.0.0",
-    "update-notifier": "^5.1.0",
-    "yargs": "^16.2.0"
+    "update-notifier": "^5.1.0"
   }
 }

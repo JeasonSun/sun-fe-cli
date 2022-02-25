@@ -1,0 +1,12 @@
+{
+  "init": {
+    "package": "@sun-fe/init",
+    "command": "init [projectName]",
+    "option": [
+      {
+        "key": "-f, --force",
+        "description": "是否强制初始化项目"
+      }
+    ]
+  }
+}
