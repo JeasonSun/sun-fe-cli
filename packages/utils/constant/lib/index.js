@@ -10,7 +10,12 @@ module.exports = {
     init: {
       package: "@sun-fe/init",
       command: "init",
-      argument: ["projectName"],
+      argument: [
+        {
+          key: "projectName",
+          description: '项目名称'
+        }
+      ],
       option: [
         {
           key: "-f, --force",

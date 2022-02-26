@@ -11,8 +11,15 @@ importers:
     dependencies:
       import-local: 3.1.0
 
+  packages/core/action:
+    specifiers:
+      fs-extra: ^10.0.1
+    dependencies:
+      fs-extra: 10.0.1
+
   packages/core/cli:
     specifiers:
+      '@sun-fe/action': workspace:^0.0.1
       '@sun-fe/constant': workspace:^0.0.1
       '@sun-fe/log': workspace:^0.0.1
       boxen: 5.1.2
@@ -24,6 +31,7 @@ importers:
       root-check: ^1.0.0
       update-notifier: ^5.1.0
     dependencies:
+      '@sun-fe/action': link:../action
       '@sun-fe/constant': link:../../utils/constant
       '@sun-fe/log': link:../../utils/log
       boxen: 5.1.2

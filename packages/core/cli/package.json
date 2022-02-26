@@ -1,6 +1,6 @@
 {
   "name": "@sun-fe/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "一站式前端研发工作脚手架",
   "main": "lib/index.js",
   "bin": {
@@ -15,6 +15,7 @@
   "author": "mojie",
   "license": "ISC",
   "dependencies": {
+    "@sun-fe/action": "workspace:^0.0.1",
     "@sun-fe/constant": "workspace:^0.0.1",
     "@sun-fe/log": "workspace:^0.0.1",
     "boxen": "5.1.2",

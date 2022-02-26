@@ -7,6 +7,7 @@ const rootCheck = require("root-check");
 const { homedir } = require("os");
 const fse = require("fs-extra");
 const dotenv = require("dotenv");
+const log = require("@sun-fe/log");
 const { DEFAULT_ENV_PATH, DEFAULT_CLI_HOME } = require("@sun-fe/constant");
 
 const pkg = require("../package.json");
@@ -20,11 +21,25 @@ const userHome = homedir();
  *  - 检查环境变量，加载环境变量
  */
 async function prepare() {
+  manualParse(); // 人工解析cli参数
   welcome(); // 欢迎词
   await checkUpdate(); // 检查版本更新
   checkRoot(); // 检查是否是root用户
   checkUserHome(); // 检查用户home目录
   checkEnv(); // 检查.env文件，加载环境变量
+}
+
+/**
+ * 由于commander是在registerCommander后添加的
+ * 在此之前的调试无法显示，
+ * 因为并没有根据--debug修改log.level
+ */
+function manualParse() {
+  const args = process.argv.slice(2);
+  if (args.includes("-d") || args.includes("--debug")) {
+    process.env.CLI_LOG_LEVEL = "verbose";
+    log.level = process.env.CLI_LOG_LEVEL;
+  }
 }
 
 function welcome() {

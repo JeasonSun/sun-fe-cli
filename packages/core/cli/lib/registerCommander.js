@@ -1,11 +1,12 @@
 "use strict";
 const path = require("path");
 
-const { Command} = require("commander");
+const { Command, Argument, Option } = require("commander");
 const dedent = require("dedent");
 const fse = require("fs-extra");
 
 const log = require("@sun-fe/log");
+const action = require("@sun-fe/action");
 const { REGISTERED_COMMAND, INTERNAL_COMMAND } = require("@sun-fe/constant");
 
 const pkg = require("../package.json");
@@ -29,22 +30,7 @@ async function registerCommander() {
     .option("-tp, --targetPath <targetPath>", "指定本地调试文件路径", "")
     .helpOption("-h, --help", "查看帮助");
 
-    program
-    .command("init [projectName]")
-    .option("-f, --force", "是否强制初始化项目")
-    .action(function(){
-      console.log(arguments)
-    });
-
-  program.addHelpText(
-    "after",
-    dedent(`
-    Examples:
-      $ ${cmdBin} --help`)
-  );
-
   const options = program.opts();
-
   program.on("option:debug", function () {
     if (options.debug) {
       process.env.CLI_LOG_LEVEL = "verbose";
@@ -55,12 +41,8 @@ async function registerCommander() {
 
   program.on("option:targetPath", function () {
     process.env.CLI_TARGET_PATH = options.targetPath;
-    log.debug("设置环境变量:CLI_TARGET_PATH", options.targetPath);
+    log.debug("设置环境变量:CLI_TARGET_PATH =", options.targetPath);
   });
-
-  program.parse(process.argv);
-
-  
 
   const registeredCommandPath = path.resolve(
     process.env.CLI_HOME_PATH,
@@ -73,11 +55,19 @@ async function registerCommander() {
     fse.writeJSONSync(registeredCommandPath, INTERNAL_COMMAND, { spaces: 2 });
     log.debug("写入内置命令配置文件成功");
   }
+  process.env.REGISTERED_COMMAND_PATH = registeredCommandPath;
   const registerCommanderData = fse.readJSONSync(registeredCommandPath);
 
-  // addCommander(program, registerCommanderData);
+  addCommander(program, registerCommanderData);
 
-  
+  program.addHelpText(
+    "after",
+    dedent(`
+    Examples:
+      $ ${cmdBin} --help`)
+  );
+  program.showSuggestionAfterError();
+  program.parse(process.argv);
 }
 
 /**
@@ -87,28 +77,26 @@ async function registerCommander() {
  */
 function addCommander(program, commandData = {}) {
   const commandKeys = Object.keys(commandData);
-  console.log(commandKeys)
-  program
-    .command("publish")
-    .option("-rs, --resetServerType", "是否重置git托管平台")
-    .option("-rt, --resetToken", "是否重置GitToken")
-    .action((...args) => {
-      console.log(args)
-    });
+  // 根据配置表，依次动态添加command
   commandKeys.forEach((key) => {
-    
-    // const commandOptions = commandData[key] || {};
-    // const { command, argument = [], option = [] } = commandOptions;
-    // if (command) {
-    //   const subCommand = new Command(command);
-    //   argument.forEach((arg) => {
-    //     subCommand.addArgument(new Argument(arg, "测试"));
-    //   });
-    //   option.forEach((opt) => {
-    //     subCommand.addOption(new Option(opt.key, opt.description));
-    //   });
-    //   program.addCommand(subCommand);
-    // }
+    const commandInfo = commandData[key] || {};
+    const { command, argument = [], option = [] } = commandInfo;
+    if (command) {
+      log.debug(`动态添加${command}命令`);
+      const subCommand = new Command(command);
+      // 添加argument
+      argument.forEach((arg) => {
+        subCommand.addArgument(new Argument(arg.key, arg.description));
+      });
+      // 添加option
+      option.forEach((opt) => {
+        subCommand.addOption(new Option(opt.key, opt.description));
+      });
+      // 添加action
+      subCommand.action(action);
+
+      program.addCommand(subCommand);
+    }
   });
 }
 
