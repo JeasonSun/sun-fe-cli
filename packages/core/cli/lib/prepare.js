@@ -22,7 +22,6 @@ const userHome = homedir();
  */
 async function prepare() {
   manualParse(); // 人工解析cli参数
-  welcome(); // 欢迎词
   await checkUpdate(); // 检查版本更新
   checkRoot(); // 检查是否是root用户
   checkUserHome(); // 检查用户home目录
@@ -61,9 +60,13 @@ function welcome() {
 async function checkUpdate() {
   const notifier = await updateNotifier({
     pkg,
-    updateCheckInterval: 1000 * 60 * 60 * 24 * 7 * 0, // 1 week
+    updateCheckInterval: 1000 * 60 * 60 * 24 * 1, // 1 day
+    shouldNotifyInNpmScript: true
   });
   notifier.notify();
+  if (!notifier.update) {
+    welcome();
+  }
 }
 
 /**
