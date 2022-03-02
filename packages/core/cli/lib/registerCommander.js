@@ -67,6 +67,7 @@ async function registerCommander() {
       $ ${cmdBin} --help`)
   );
   program.showSuggestionAfterError();
+
   program.parse(process.argv);
 }
 
