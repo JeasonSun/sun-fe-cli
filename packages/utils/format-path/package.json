@@ -1,7 +1,7 @@
 {
-  "name": "@sun-fe/util",
+  "name": "@sun-fe/format-path",
   "version": "0.0.1",
-  "description": "",
+  "description": "兼容Window/POSIX 对于不同path.sep的处理",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,10 +10,6 @@
     "access": "public"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@sun-fe/log": "workspace:^0.0.1",
-    "latest-version": "^5.0.0"
-  }
+  "author": "mojie",
+  "license": "ISC"
 }

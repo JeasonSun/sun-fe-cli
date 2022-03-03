@@ -1,7 +1,7 @@
 {
-  "name": "@sun-fe/util",
+  "name": "@sun-fe/command",
   "version": "0.0.1",
-  "description": "",
+  "description": "command基类，@sun-fe中所有的command都需要继承此类，实现init&exec",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sun-fe/constant": "workspace:^0.0.1",
     "@sun-fe/log": "workspace:^0.0.1",
-    "latest-version": "^5.0.0"
+    "semver": "^7.3.5"
   }
 }

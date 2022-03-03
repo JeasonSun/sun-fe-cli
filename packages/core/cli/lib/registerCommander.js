@@ -67,7 +67,6 @@ async function registerCommander() {
       $ ${cmdBin} --help`)
   );
   program.showSuggestionAfterError();
-
   program.parse(process.argv);
 }
 
@@ -91,7 +90,11 @@ function addCommander(program, commandData = {}) {
       });
       // 添加option
       option.forEach((opt) => {
-        subCommand.addOption(new Option(opt.key, opt.description));
+        const optionArgs = [opt.key, opt.description];
+        if (opt.default) {
+          optionArgs.push(opt.default);
+        }
+        subCommand.addOption(new Option(...optionArgs));
       });
       // 添加action
       subCommand.action(action);

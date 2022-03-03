@@ -19,6 +19,7 @@ module.exports = {
       option: [
         {
           key: "-f, --force",
+          default: false,
           description: "是否强制初始化项目",
         },
       ],
@@ -26,4 +27,5 @@ module.exports = {
   },
   // 已经注册的扩展命令信息
   REGISTERED_COMMAND: ".registered_command",
+  LOWEST_NODE_VERSION: '12.0.0'
 };

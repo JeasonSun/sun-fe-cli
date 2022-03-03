@@ -1,7 +1,7 @@
 {
-  "name": "@sun-fe/util",
+  "name": "@sun-fe/init",
   "version": "0.0.1",
-  "description": "",
+  "description": "sun-fe-cli内置commander init,快速初始化项目",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sun-fe/log": "workspace:^0.0.1",
-    "latest-version": "^5.0.0"
+    "@sun-fe/command": "workspace:^0.0.1"
   }
 }

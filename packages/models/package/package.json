@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sun-fe/format-path": "workspace:^0.0.1",
     "@sun-fe/log": "workspace:^0.0.1",
-    "@sun-fe/util": "workspace:^1.0.0",
-    "fs-extra": "^10.0.1"
+    "@sun-fe/util": "workspace:^0.0.1",
+    "fs-extra": "^10.0.1",
+    "pkg-dir": "^5.0.0"
   }
 }
